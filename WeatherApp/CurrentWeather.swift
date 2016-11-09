@@ -51,6 +51,33 @@ class CurrentWeather {
         }
         return _currentTemp
     }
+    //'completed:...' must be declared in constains file type alias
+    func downloadWeatherDetails(completed: DownloadComplete) {
+        //Alaom fire download info
+        let currentWeatherURL = URL(string: CURRENT_WEATHER_URL)!
+        //removed ".GET" from arg
+        Alamofire.request(currentWeatherURL).responseJSON { response in
+            let result = response.result
+            print(response)
+        }
+        completed()
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
 }
