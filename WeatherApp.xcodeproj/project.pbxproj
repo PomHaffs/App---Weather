@@ -17,6 +17,7 @@
 		FEFB35561DD2C79100A907AE /* Constaints.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEFB35551DD2C79100A907AE /* Constaints.swift */; };
 		FEFB35581DD2C99E00A907AE /* CurrentWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEFB35571DD2C99E00A907AE /* CurrentWeather.swift */; };
 		FEFB355A1DD3FD3600A907AE /* Forecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEFB35591DD3FD3600A907AE /* Forecast.swift */; };
+		FEFB355E1DD4327100A907AE /* WeatherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEFB355D1DD4327100A907AE /* WeatherCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		FEFB35551DD2C79100A907AE /* Constaints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constaints.swift; sourceTree = "<group>"; };
 		FEFB35571DD2C99E00A907AE /* CurrentWeather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentWeather.swift; sourceTree = "<group>"; };
 		FEFB35591DD3FD3600A907AE /* Forecast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Forecast.swift; sourceTree = "<group>"; };
+		FEFB355D1DD4327100A907AE /* WeatherCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 				FEFB35551DD2C79100A907AE /* Constaints.swift */,
 				FEFB35571DD2C99E00A907AE /* CurrentWeather.swift */,
 				FEFB35591DD3FD3600A907AE /* Forecast.swift */,
+				FEFB355D1DD4327100A907AE /* WeatherCell.swift */,
 			);
 			path = WeatherApp;
 			sourceTree = "<group>";
@@ -230,6 +233,7 @@
 				FE4294141DD1910900FD05AE /* WeatherVC.swift in Sources */,
 				FEFB355A1DD3FD3600A907AE /* Forecast.swift in Sources */,
 				FE4294121DD1910900FD05AE /* AppDelegate.swift in Sources */,
+				FEFB355E1DD4327100A907AE /* WeatherCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
