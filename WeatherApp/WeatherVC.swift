@@ -29,14 +29,16 @@ class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         super.viewDidLoad()
         
         currentWeather = CurrentWeather()
-        forecast = Forecast()
         
         //this tells comp where to find the dependancies above
         tableView.delegate = self
         tableView.dataSource = self
         
         currentWeather.downloadWeatherDetails {
-            self.updateMainUI()
+            self.downloadForecastData {
+                self.updateMainUI()
+            }
+   
         }
 
     }
@@ -53,13 +55,16 @@ class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                     //loop goes thru all forecast and store ALL info in above array
                     for obj in list {
                         let forecast = Forecast(weatherDict: obj)
-                        self.forecast.append(forecast)
+                        self.forecasts.append(forecast)
+                        print(obj)
                     }
                     
                 }
+                
             }
-        }
             
+        }
+       completed()     
     }
     
     //this is need for all tableView things 1 of 3
