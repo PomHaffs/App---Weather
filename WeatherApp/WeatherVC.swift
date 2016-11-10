@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import CoreLocation
 import Alamofire
 
-class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate {
 
 
     @IBOutlet weak var dateLabel: UILabel!
@@ -18,19 +19,26 @@ class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var currentWeatherImage: UIImageView!
     @IBOutlet weak var currentWeatherTypeLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
+//LOCATION
+    let locationManger = CLLocationManager()
+    var currentLocation: CLLocation!
     
     var currentWeather = CurrentWeather()
-    //as above but for mini data on app
+//as above but for mini data on app
     var forecast: Forecast!
-    //need the below array to store all JSON forecast info
+//need the below array to store all JSON forecast info
     var forecasts = [Forecast]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//LOCATION
+        locationManger.delegate = self
+        locationManger.desiredAccuracy = kCLLocationAccuracyBest
+        locationManger.requestWhenInUseAuthorization()
         
         currentWeather = CurrentWeather()
         
-        //this tells comp where to find the dependancies above
+//this tells comp where to find the dependancies above
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -98,11 +106,11 @@ class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     func updateMainUI() {
         dateLabel.text = currentWeather.date
-        //turns double into a string cos UILabel needs string
+//turns double into a string cos UILabel needs string
         currentTempLabel.text = "\(currentWeather.currentTemp)"
         currentWeatherTypeLabel.text = currentWeather.weatherType
         locationLabel.text = currentWeather.cityName
-        //this is a hack where you name all your img the same name as what is returned
+//this is a hack where you name all your img the same name as what is returned
         currentWeatherImage.image = UIImage(named: currentWeather.weatherType)
         
     }

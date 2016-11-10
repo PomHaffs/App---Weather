@@ -77,8 +77,8 @@ class CurrentWeather {
                 
                 if let main = dict["main"] as? Dictionary<String, AnyObject> {
                     if let currentTemp = main["temp"] as? Double {
-                        
-                        let kevinToCels = (currentTemp - 273.15)
+
+                        let kevinToCels = (round((currentTemp - 273.15)*100)/100)
                         
                         self._currentTemp = kevinToCels
                         print(self._currentTemp)

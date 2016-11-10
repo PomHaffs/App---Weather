@@ -51,13 +51,13 @@ class Forecast {
         if let temp = weatherDict["temp"] as? Dictionary<String, AnyObject> {
             if let min = temp["min"] as? Double {
                 
-                let kevinToCels = Double(min - 273.15)
+                let kevinToCels = (round((min - 273.15)*100)/100)
                 self._lowTemp = "\(kevinToCels)" //converts to string
             }
             
             if let max = temp["max"] as? Double {
                 
-                let kevinToCels = Double(max - 273.15)
+                let kevinToCels = (round((max - 273.15)*100)/100)
                 self._highTemp = "\(kevinToCels)" //converts to string
             }
         }
