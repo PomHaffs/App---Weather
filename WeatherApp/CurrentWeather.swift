@@ -52,7 +52,7 @@ class CurrentWeather {
         return _currentTemp
     }
     //'completed:...' must be declared in constains file type alias
-    func downloadWeatherDetails(completed: DownloadComplete) {
+    func downloadWeatherDetails(completed: @escaping DownloadComplete) {
         //Alaom fire download info
         let currentWeatherURL = URL(string: CURRENT_WEATHER_URL)!
         //removed ".GET" from arg
@@ -78,32 +78,16 @@ class CurrentWeather {
                 if let main = dict["main"] as? Dictionary<String, AnyObject> {
                     if let currentTemp = main["temp"] as? Double {
                         
-                        let kevilToCels = Double(currentTemp - 273.15)
+                        let kevinToCels = (currentTemp - 273.15)
                         
-                        self._currentTemp = kevilToCels
+                        self._currentTemp = kevinToCels
                         print(self._currentTemp)
                     }
                 }
             }
+           completed()
         }
-        completed()
+//        completed()
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
 }
