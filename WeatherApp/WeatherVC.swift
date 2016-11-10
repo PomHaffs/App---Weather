@@ -58,7 +58,7 @@ class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                         self.forecasts.append(forecast)
                         print(obj)
                     }
-                    
+                    self.tableView.reloadData()
                 }
                 
             }
@@ -73,14 +73,21 @@ class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     //this is 2 of 3
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6
+        //this is important or an INDEX out of range err will happen
+        return forecasts.count
     }
     //this is 3 of 3 - creates generic cell for duplication
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //ID MUST link to table ID in storyboard
-        let cell = tableView.dequeueReusableCell(withIdentifier: "weatherCell", for: indexPath)
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "weatherCell", for: indexPath) as? WeatherCell {
+            
+            let forecast = forecasts[indexPath.row]
+            cell.configureCell(forecast: forecast)
+            return cell
+        } else {
+            return WeatherCell()
+        }
         
-        return cell
     }
     
     func updateMainUI() {
