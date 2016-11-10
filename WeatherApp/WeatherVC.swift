@@ -19,7 +19,7 @@ class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource, C
     @IBOutlet weak var currentWeatherImage: UIImageView!
     @IBOutlet weak var currentWeatherTypeLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
-//LOCATION
+//LOCATION INIT
     let locationManger = CLLocationManager()
     var currentLocation: CLLocation!
     
@@ -31,10 +31,11 @@ class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource, C
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//LOCATION
+//LOCATION SETUP
         locationManger.delegate = self
         locationManger.desiredAccuracy = kCLLocationAccuracyBest
         locationManger.requestWhenInUseAuthorization()
+        locationManger.startMonitoringSignificantLocationChanges()
         
         currentWeather = CurrentWeather()
         
@@ -49,6 +50,24 @@ class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource, C
    
         }
 
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        locationAuthStatus()
+    }
+    
+    func locationAuthStatus() {
+        if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
+            currentLocation = locationManger.location
+//Saving to singleton class LOCATION.swift = GLOBAL
+            Location.sharedInstance.latitude = currentLocation.coordinate.latitude
+            Location.sharedInstance.longitude = currentLocation.coordinate.longitude
+            print(Location.sharedInstance.latitude, Location.sharedInstance.longitude)
+        } else {
+            locationManger.requestWhenInUseAuthorization()
+            locationAuthStatus()
+        }
     }
     
     func downloadForecastData(completed: DownloadComplete) {
