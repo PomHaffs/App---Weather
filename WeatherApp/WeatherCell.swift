@@ -18,6 +18,7 @@ class WeatherCell: UITableViewCell {
     @IBOutlet weak var lowTemp: UILabel!
     
     func configureCell(forecast: Forecast){
+        //this changes double to string
         lowTemp.text = "\(forecast.lowTemp)"
         highTemp.text = "\(forecast.highTemp)"
         weatherType.text = forecast.weatherType

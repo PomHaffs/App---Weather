@@ -44,7 +44,7 @@ class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     func downloadForecastData(completed: DownloadComplete) {
-        //Download forecast data for table view
+//Download forecast data for table view
         let forecastURL = URL(string: FORECAST_URL)!
         Alamofire.request(forecastURL).responseJSON { response in
             let result = response.result
@@ -52,12 +52,15 @@ class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             if let dict = result.value as? Dictionary<String, AnyObject> {
                 
                 if let list = dict["list"] as? [Dictionary<String, AnyObject>] {
-                    //loop goes thru all forecast and store ALL info in above array
+//loop goes thru all forecast and store ALL info in above array
                     for obj in list {
                         let forecast = Forecast(weatherDict: obj)
                         self.forecasts.append(forecast)
                         print(obj)
                     }
+//need to remove first because want tomorrows data
+                    self.forecasts.remove(at: 0)
+//reload needed to ensure new data is there to pull into view
                     self.tableView.reloadData()
                 }
                 
@@ -67,18 +70,21 @@ class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
        completed()     
     }
     
-    //this is need for all tableView things 1 of 3
+//this is need for all tableView things 1 of 3
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-    //this is 2 of 3
+    
+//this is 2 of 3
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //this is important or an INDEX out of range err will happen
+//this is important or an 'INDEX out of range' err will happen
         return forecasts.count
     }
-    //this is 3 of 3 - creates generic cell for duplication
+//this is 3 of 3 - creates generic cell for duplication
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //ID MUST link to table ID in storyboard
+        
+//ID MUST link to table ID in storyboard
         if let cell = tableView.dequeueReusableCell(withIdentifier: "weatherCell", for: indexPath) as? WeatherCell {
             
             let forecast = forecasts[indexPath.row]
