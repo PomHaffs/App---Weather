@@ -47,22 +47,22 @@ class CurrentWeather {
     
     var currentTemp: Double {
         if _currentTemp == nil {
-            _currentTemp = 0
+            _currentTemp = 0.0
         }
         return _currentTemp
     }
     //'completed:...' must be declared in constains file type alias
     func downloadWeatherDetails(completed: @escaping DownloadComplete) {
-        //Alaom fire download info
-        let currentWeatherURL = URL(string: CURRENT_WEATHER_URL)!
+        //Alamo fire download info
         //removed ".GET" from arg
-        Alamofire.request(currentWeatherURL).responseJSON { response in
+        Alamofire.request(CURRENT_WEATHER_URL).responseJSON { response in
             let result = response.result
+            
           
 //This shows how to dig into the JSON and asign values from each layer!!!!!
             
             if let dict = result.value as? Dictionary<String, AnyObject> {
-                
+              print(dict)
                 if let name  = dict["name"] as? String {
                     self._cityName = name.capitalized
                     print(self._cityName)

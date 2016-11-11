@@ -42,13 +42,14 @@ class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource, C
 //this tells comp where to find the dependancies above
         tableView.delegate = self
         tableView.dataSource = self
-        
-        currentWeather.downloadWeatherDetails {
-            self.downloadForecastData {
-                self.updateMainUI()
-            }
-   
-        }
+
+        //MOVED TO AFTER LOCATION NEEDED
+//        currentWeather.downloadWeatherDetails {
+//            self.downloadForecastData {
+//                self.updateMainUI()
+//            }
+//   
+//        }
 
     }
     
@@ -63,7 +64,12 @@ class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource, C
 //Saving to singleton class LOCATION.swift = GLOBAL
             Location.sharedInstance.latitude = currentLocation.coordinate.latitude
             Location.sharedInstance.longitude = currentLocation.coordinate.longitude
-            print(Location.sharedInstance.latitude, Location.sharedInstance.longitude)
+            currentWeather.downloadWeatherDetails {
+                self.downloadForecastData {
+                    self.updateMainUI()
+                }
+                
+            }
         } else {
             locationManger.requestWhenInUseAuthorization()
             locationAuthStatus()
@@ -72,8 +78,7 @@ class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource, C
     
     func downloadForecastData(completed: DownloadComplete) {
 //Download forecast data for table view
-        let forecastURL = URL(string: FORECAST_URL)!
-        Alamofire.request(forecastURL).responseJSON { response in
+        Alamofire.request(FORECAST_URL).responseJSON { response in
             let result = response.result
             
             if let dict = result.value as? Dictionary<String, AnyObject> {
@@ -83,7 +88,7 @@ class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource, C
                     for obj in list {
                         let forecast = Forecast(weatherDict: obj)
                         self.forecasts.append(forecast)
-                        print(obj)
+                        //print(obj)
                     }
 //need to remove first because want tomorrows data
                     self.forecasts.remove(at: 0)
