@@ -1,7 +1,9 @@
 # App---Weather
 
-##Basic weather app
+#Basic single page view weather app showing current day and forecast for upto 10 days ahead.
 
-##GPS current location selector
+Cocoapods:
+Alamofire
 
-##Pulls all weather data and 10 days ahead
+API:
+openweathermap.org
