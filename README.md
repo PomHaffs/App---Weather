@@ -17,5 +17,6 @@ Use of CoreLocation and geolocation hardware
 JSON searching and extraction of required data
 Singleton Class
 
-
+##Issues
+Use of GPS on phone seems to only work intermitantly.
 
