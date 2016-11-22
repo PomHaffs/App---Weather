@@ -20,4 +20,5 @@ Singleton Class
 ##Issues
 Use of GPS on phone seems to only work intermitantly.
 Some issues with location in simulator.
+Possible solution maybe updating Cocapods??
 
